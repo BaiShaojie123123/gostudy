@@ -2,86 +2,71 @@ package main
 
 import "fmt"
 
-//数组传参
-//固定数组不建议, 如果数组长度不对，会报错
-//传参在函数内部修改数组的值，函数外部不能看到修改后的值
-//func test(arr [5]int) {
-//	for index, value := range arr {
-//		fmt.Println(index, value)
-//	}
-//}
-
-//遍历数组1  引用传递,内部改变外部也会改变
-func test(arr []int) {
-
-	//遍历数组
-	//index是下标，value是值,写了下标就可以取值，没有下标就只能取下标,不能取值
-	//for 中的变量定义了必须使用，否则报错
-	for index, value := range arr {
-		fmt.Println(index, value)
-	}
-
-	//修改数组中的值,注意传进来的数组不能是空数组
-	arr[0] = 100
-}
-
-//遍历数组2 引用传递,内部改变外部也会改变
-func test3(arr []int) {
-	//_表示忽略变量,可以使用_不会报错,不写就是遍历数组的下标,所以想取值必须写上下标或者用 _ 代替
-	for _, value := range arr {
-		fmt.Println(value)
-	}
-}
-
-//遍历数组3 引用传递,内部改变外部也会改变
-func test2(arr []int) {
-	//遍历数组
-	for i := 0; i < len(arr); i++ {
-		fmt.Println(arr[i])
-	}
-}
-
 func main() {
-	//	定义数组
-	//	1.固定大小的数组 默认值为0
-	var arr [10]int
-	arr[0] = 1
-	arr[1] = 2
 
-	fmt.Println(arr)
-	//遍历数组
-	for i := 0; i < len(arr); i++ {
-		fmt.Println(arr[i])
+	//1. 定义切片,给切片赋值
+	//slice :=[]int{1,2}
+
+	//2. 定义动态切片,但是没有给切片分配空间,注意判断切片是否为nil,否则直接赋值会报错
+	//var slice []int
+	//此时会报错:因为没有分配空间,所以不能赋值
+	//slice[0] = 1
+
+	//3. 定义动态切片,给切片分配空间, 1代表只给了一个位置, 下标从0开始,如果分配空间数量小于实际数量,进行赋值操作会报错
+	//var slice = make([]int, 1)
+
+	//4. 定义动态切片  , 第二个参数代表给了一个位置
+	// 第二个参数分配空间数量  设置的几len就是几,数组中的值默认值被填充为0. 如果设置为0,则不分配空间,只是创建一个空切片cap=1
+	// 第三个参数代表cap容量,不写默认为设置的分配空间数值
+	//slice := make([]int, 3, 5)
+	slice := make([]int, 0)
+	//赋值 如果第二个参数没有分配空间,则会报错
+	//slice[0] = 3
+
+	if slice != nil {
+		fmt.Printf("slice空间长度len=%d ,cap容量=%d  %v\n", len(slice), cap(slice), slice)
+	} else {
+		fmt.Println("slice is nil")
 	}
 
-	//2.固定大小给默认值
-	myarr := [5]int{1, 2, 3, 4, 5}
+	//切片追加元素,动态增加空间,如果定义了cap容量, 调用append时会动态增加设置的cap容量
+	slice = append(slice, 2)
+	slice = append(slice, 5)
+	slice = append(slice, 6)
+	slice = append(slice, 7)
 
-	//查看数组类型
-	fmt.Printf("%T\n", arr)
-	fmt.Printf("%T\n", myarr)
+	if slice != nil {
+		fmt.Printf("slice空间长度len=%d ,cap容量=%d  %v\n", len(slice), cap(slice), slice)
+	} else {
+		fmt.Println("slice is nil")
+	}
 
-	//数组传参
-	//test(myarr)
+	//截取数组 左闭右开
+	//[下标:(第几个元素=下标+1)]
+	// 取下标为1到2的元素
+	s1 := slice[1:3]
+	fmt.Printf("s1空间长度len=%d ,cap容量=%d  %v\n", len(s1), cap(s1), s1)
+	//取下标为0到1的元素
+	s2 := slice[0:2]
+	fmt.Printf("s2空间长度len=%d ,cap容量=%d  %v\n", len(s2), cap(s2), s2)
+	//从开始到第几个元素
+	s3 := slice[:2]
+	fmt.Printf("s3空间长度len=%d ,cap容量=%d  %v\n", len(s3), cap(s3), s3)
+	//从下标到结束
+	s4 := slice[2:]
+	fmt.Printf("s4空间长度len=%d ,cap容量=%d  %v\n", len(s4), cap(s4), s4)
 
-	//3. 动态大小的数组,切片 []中没有数字
-	var myarr2 = []int{1, 2, 3, 4, 5}
-	var myarr3 = []int{}
-	myarr5 := []int{1, 2, 3, 4, 5}
-	myarr6 := []int{}
+	//切片后的新切片,进行赋值,会修改原切片的值
+	s4[0] = 100
+	fmt.Printf("s4空间长度len=%d ,cap容量=%d  %v\n", len(s4), cap(s4), s4)
 
-	//打印 myarr2
-	//fmt.Println(myarr2)
-	//fmt.Println(myarr3)
-
-	//遍历数组
-	test3(myarr2)
-	test3(myarr3)
-	//修改数组中的值,注意传进来的数组不能是空数组
-	test(myarr2)
-	fmt.Println(myarr2)
-
-	fmt.Println(myarr5)
-	fmt.Println(myarr6)
+	//切片的深拷贝
+	s5 := make([]int, len(s4))
+	copy(s5, s4)
+	fmt.Printf("s5空间长度len=%d ,cap容量=%d  %v\n", len(s5), cap(s5), s5)
+	//此时修改s5的值,不会修改s4的值
+	s5[0] = 200
+	fmt.Printf("s4空间长度len=%d ,cap容量=%d  %v\n", len(s4), cap(s4), s4)
+	fmt.Printf("s5空间长度len=%d ,cap容量=%d  %v\n", len(s5), cap(s5), s5)
 
 }

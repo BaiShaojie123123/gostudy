@@ -13,5 +13,6 @@
 6. [指针](./pointer/pointer.go)  
 引用传递,传递指针  
 7. [defer](./defer/defer.go)  
-8. [切片](./slice/slice.go)  
-      
+8. [数组与动态数组定义操作](./array_slice/array_slice.go)
+9. [数组切片定义与操作](slice/slice.go)
+      ![img_1.png](img_1.png)
