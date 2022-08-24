@@ -28,7 +28,7 @@
         1. 定义结构体
         2. 修改结构体的值
         2. 往函数传参结构体默认是值传递,引用传递按照定义普通变量方式
-        3. 遍历结构体
+        3. [遍历结构体](./object/reflect/reflect.go)
     2. [类的表示与封装](./object/class/class.go)
         1. 类的创建
             1. 对象实例化
@@ -40,6 +40,31 @@
             1. 子类继承父类
             2. 子类方法重写父类方法
             3. 对象实例化
-    4. [面向对象多态接口](./object/interface/interface.go)
-           
-      
+    4. 面向对象多态接口
+        1. [接口](./object/interface/interface.go)
+            1. 接口定义
+            2. 接口实现
+            3. 接口使用 依赖注入,一个方法的形参接收变量,变量类型是一个接口
+        2. [万能类型空接口](./object/empty_interface/empty_interface.go)
+            1. 类型断言,判断类型
+            2. 空接口 形参中类型位置是interface{} 例如: func (arg interface{})  
+    5. 反射
+       1. pair<type,value>
+       2. 断言成功是pair中的type相同
+          ![img_2.png](img_2.png)
+       3. [反射reflect机制用法](./object/reflect/reflect.go)
+          1. 获取一个变量的类型 reflect.TypeOf(变量)
+          2. 获取一个变量的值 reflect.ValueOf(变量)
+          3. 获取对象类型的方法集合,循环 
+          4. 获取对象类型的变量集合,循环
+       4. [反射解析结构体标签Tag](./object/reflect_tag/reflect_tag.go)
+          1. json标签
+    6. 方法
+       1. 小数加减乘除
+       2. 整数加减乘除
+       3. 字符串变更
+       4. 字符串截取
+       5. 字符串拼接
+       6. 字符串替换
+       7. [json字符串转对象](./object/reflect_tag/reflect_tag.go)
+       8. [对象转json字符串](./object/reflect_tag/reflect_tag.go)
