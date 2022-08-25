@@ -59,12 +59,18 @@
           4. 获取对象类型的变量集合,循环
        4. [反射解析结构体标签Tag](./object/reflect_tag/reflect_tag.go)
           1. json标签
-    6. 方法
-       1. 小数加减乘除
-       2. 整数加减乘除
-       3. 字符串变更
-       4. 字符串截取
-       5. 字符串拼接
-       6. 字符串替换
-       7. [json字符串转对象](./object/reflect_tag/reflect_tag.go)
-       8. [对象转json字符串](./object/reflect_tag/reflect_tag.go)
+12. goroutine 协程
+    1. [基础创建](./object/goroutine/goroutine.go) 
+    2. [协程参数通信-无缓冲,有阻塞](./object/goroutine_channel/goroutine_channel.go)
+               ![img_4.png](img_4.png)
+    3. [协程参数通信-有缓冲](./object/goroutine_channel_huanchong/goroutine_channel_huanchong.go)
+               ![img_3.png](img_3.png)
+13. 方法
+    1. 小数加减乘除
+    2. 整数加减乘除
+    3. 字符串变更
+    4. 字符串截取
+    5. 字符串拼接
+    6. 字符串替换
+    7. [json字符串转对象](./object/reflect_tag/reflect_tag.go)
+    8. [对象转json字符串](./object/reflect_tag/reflect_tag.go)
