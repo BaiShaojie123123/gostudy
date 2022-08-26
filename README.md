@@ -61,16 +61,72 @@
           1. json标签
 12. goroutine 协程
     1. [基础创建](./object/goroutine/goroutine.go) 
-    2. [协程参数通信-无缓冲,有阻塞](./object/goroutine_channel/goroutine_channel.go)
+    2. [协程参数通信-无缓冲channel](./object/goroutine_channel/goroutine_channel.go)
                ![img_4.png](img_4.png)
-    3. [协程参数通信-有缓冲](./object/goroutine_channel_huanchong/goroutine_channel_huanchong.go)
+    3. [协程参数通信-有缓冲channel](./object/goroutine_channel_huanchong/goroutine_channel_huanchong.go)
                ![img_3.png](img_3.png)
+    4. [协程参数通信-关闭channel,判断channel状态](./object/goroutine_channel_close/goroutine_channel_close.go)
+               ![img_5.png](img_5.png)
+    5. [协程参数通信-监控多个channel状态](./object/goroutine_channel_select/goroutine_channel_select.go)
+       channel传值传递,引用传递
 13. 方法
-    1. 小数加减乘除
-    2. 整数加减乘除
+    1. [小数 整数,加减乘除](./arithmetic/arithmetic.go)
+    2. 加减乘除
     3. 字符串变更
     4. 字符串截取
     5. 字符串拼接
     6. 字符串替换
     7. [json字符串转对象](./object/reflect_tag/reflect_tag.go)
     8. [对象转json字符串](./object/reflect_tag/reflect_tag.go)
+14. Go Module
+    1. 命令 
+       1. go mod init 生成go.mod文件,初始化
+       2. go mod download 下载依赖的包
+       3. go mod tidy 检查并修复go.mod文件
+       4. go mod vendor 把依赖的包移动到vendor目录下
+       5. go mod graph 查看依赖图
+       6. go mod list 查看依赖列表
+       7. go mod verify 校验依赖是否正确
+       8. go mod why 查看依赖原因
+       9. go mod edit 编辑go.mod文件
+    2. go mod 环境变量 
+       1. GO111MODULE![img_6.png](img_6.png)
+          开启go module模式  
+          ```shell
+           go env -w GO111MODULE=on
+          ```       
+       2. GOPROXY![img_7.png](img_7.png)
+          设置代理
+          ```shell
+           #七牛云
+           go env -w GOPROXY=https://goproxy.cn,direct
+           #阿里云
+           go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
+           #同时设置两个代理
+           go env -w GOPROXY=https://goproxy.cn,https://mirrors.aliyun.com/goproxy/,direct
+          ```
+       3. 私有仓库,设置后*.example.com 域名下的所有包都不会验证,不会走代理
+          ```shell
+              go env -w GOPRIVATE=*.example.com
+          ```
+       4. 初始化项目
+          1. 开启go module模式~~~~
+              ```shell
+                  go env -w GO111MODULE=on
+                    
+                  ```
+          2. 初始化项目
+              ```shell
+                 #创建项目目录不必在 $GOPATH/src 目录下,随便创建一个目录,goprojectname(项目目录名)/modules_test(模块名)
+                    mkdir -p ~/goprojectname/modules_test
+                 #执行Go Modules初始化 
+                    cd ~/goprojectname/modules_test
+                    #go mod init 跟上当前模块名称 决定import 导入的路径 , 会生成go.mod 文件
+                    go mod init github.com/xxx/modules_test 
+                 #下载依赖,多次执行会将依赖更新到最新版本,没有类似前端 package.json文件 语义化版本号的方式
+                    go mod download
+              ``` 
+       5. 修改项目模块的版本依赖关系
+          go mod edit -replace=老版本=新版本
+          或者直接修改go.modw文件对应的版本号
+       
