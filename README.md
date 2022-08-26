@@ -129,4 +129,9 @@
        5. 修改项目模块的版本依赖关系
           go mod edit -replace=老版本=新版本
           或者直接修改go.modw文件对应的版本号
-       
+15. 项目案例
+    1. [looklook](https://github.com/Mikaelemmmm/go-zero-looklook)  
+    [bilibili教程](https://www.bilibili.com/medialist/play/389552232?from=space&business=space_series&business_id=2122723)
+    2. 及时通信系统小例子
+        1. 
+        
