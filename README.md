@@ -133,5 +133,31 @@
     1. [looklook](https://github.com/Mikaelemmmm/go-zero-looklook)  
     [bilibili教程](https://www.bilibili.com/medialist/play/389552232?from=space&business=space_series&business_id=2122723)
     2. 及时通信系统小例子
-        1. 
-        
+        1. [0.1v 创建基础socket server,异步处理监听tcp连接](./project/chat/v0.1)
+            编译命令
+            ```shell
+                go build -o ./project/chat/v0.1/chat_server ./project/chat/v0.1/main.go ./project/chat/v0.1/create_server.go
+            ```
+           运行命令
+            ```shell
+                ./project/chat/v0.1/chat_server
+            ```
+           启动另外一个命令窗口发送tcp到server
+            ```shell
+               nc 127.0.0.1:8080
+            ```
+        2. [0.2v 用户上线](./project/chat/v0.2)
+            ![img_8.png](img_8.png)
+            ![img_9.png](img_9.png)
+           编译命令
+            ```shell
+                go build -o ./project/chat/v0.2/chat_server ./project/chat/v0.2/main.go ./project/chat/v0.2/create_server.go ./project/chat/v0.2/user.go
+            ```
+           运行命令
+            ```shell
+                ./project/chat/v0.2/chat_server
+            ```
+           启动另外一个命令窗口发送tcp到server
+            ```shell
+               nc 127.0.0.1:8080
+            ```
